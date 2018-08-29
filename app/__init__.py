@@ -14,7 +14,7 @@ def create_app():
     # db.create_all(app=app)
     with app.app_context():
         db.create_all()
-        
+
     return app
 
 
