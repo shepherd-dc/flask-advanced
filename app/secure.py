@@ -1,4 +1,7 @@
+import os
+
 DEBUG = True
+SECRET_KEY = os.urandom(24)
 
 # dialect+driver://username:password@host:port/database
 DIALECT = 'mysql'

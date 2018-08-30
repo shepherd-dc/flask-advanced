@@ -4,3 +4,4 @@ web = Blueprint('web', __name__)
 
 from app.web import books
 from app.web import users
+from app.web import tests
