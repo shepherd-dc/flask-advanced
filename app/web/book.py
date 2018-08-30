@@ -1,4 +1,4 @@
-from flask import jsonify, request, json
+from flask import jsonify, request, json, render_template, flash
 
 from . import web
 
@@ -6,6 +6,7 @@ from app.view_models.book import BookCollection
 from app.spider.book import Book
 from app.libs.helper import is_isbn_or_key
 from app.forms.book import SearchForm
+
 
 @web.route('/book/search')
 def search():
@@ -27,6 +28,14 @@ def search():
             bookData.search_by_keyword(q, page)
 
         books.fill(bookData, q)
-        return json.dumps(books, default=lambda o: o.__dict__)
+        # return json.dumps(books, default=lambda o: o.__dict__)
     else:
-        return jsonify(form.errors)
+        flash('搜索关键字有误，请重新输入')
+        # return jsonify(form.errors)
+
+    return render_template('search_result.html', books=books)
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    pass

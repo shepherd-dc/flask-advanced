@@ -2,6 +2,5 @@ from flask import Blueprint
 
 web = Blueprint('web', __name__)
 
-from app.web import books
-from app.web import users
-from app.web import tests
+from app.web import book, auth, drift, gift, main, wish
+from app.web import test
