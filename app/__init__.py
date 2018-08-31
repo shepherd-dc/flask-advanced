@@ -1,6 +1,6 @@
 from flask import Flask
 
-from app.models import db
+from app.models.base import db
 from app.web import web
 
 

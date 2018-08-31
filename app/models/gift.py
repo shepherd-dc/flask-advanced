@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, Boolean, ForeignKey, String
 from sqlalchemy.orm import relationship
 
-from . import Base
+from app.models.base import Base
 
 
 class Gift(Base):

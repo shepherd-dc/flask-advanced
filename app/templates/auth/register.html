@@ -16,7 +16,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 flex-vertical personal-detail">
-                        <form action="{{ url_for('web.register') }}" method="post">
+                        <form action="{{ url_for('web.register') }}" method="post" id="register">
                             <input style="width:100%" id="nickname" name="nickname"
                                    type="text"
                                    placeholder="昵称"
@@ -30,9 +30,14 @@
                                    name="password"
                                    placeholder="密码"
                                    class="none-input" type="password">
-                            <input style="margin-top:15px;" id="btn-submit" type="submit"
-                                   class="btn btn-big btn-block" value="注册">
+                            <input style="margin-top:15px;" id="btn-submit" type="button"
+                                   class="btn btn-big btn-block" value="注册" onclick="submitForm()">
                         </form>
+                        <script>
+                            function submitForm(){
+                                $('#register').submit()
+                            }
+                        </script>
                     </div>
                 </div>
                 <div style="margin-top:30px;" class="row">
