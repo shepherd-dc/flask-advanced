@@ -10,9 +10,9 @@ from app.forms.book import SearchForm
 
 @web.route('/book/search')
 def search():
-    '''
+    """
     /book/search?q=金庸&page=1
-    '''
+    """
     form = SearchForm(request.args)
     books = BookCollection()
 
@@ -21,19 +21,19 @@ def search():
         page = form.page.data
         isbn_or_key = is_isbn_or_key(q)
 
-        bookData = Book()
+        book_data = Book()
         if isbn_or_key == 'isbn':
-            bookData.search_by_isbn(q)
+            book_data.search_by_isbn(q)
         else:
-            bookData.search_by_keyword(q, page)
+            book_data.search_by_keyword(q, page)
 
-        books.fill(bookData, q)
+        books.fill(book_data, q)
         # return json.dumps(books, default=lambda o: o.__dict__)
     else:
         flash('搜索关键字有误，请重新输入')
         # return jsonify(form.errors)
 
-    return render_template('search_result.html', books = books)
+    return render_template('search_result.html', books=books)
 
 
 @web.route('/book/<isbn>/detail')
@@ -43,4 +43,4 @@ def book_detail(isbn):
     book_detail = BookViewModel(book.first)
     # return jsonify(book_detail.__dict__)
     # return json.dumps(book_detail, default=lambda o: o.__dict__)
-    return render_template('book_detail.html', book = book_detail, wishes = [], gifts = [])
+    return render_template('book_detail.html', book=book_detail, wishes=[], gifts=[])

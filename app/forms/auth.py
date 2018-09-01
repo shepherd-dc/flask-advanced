@@ -4,9 +4,12 @@ from wtforms.validators import DataRequired, Length, Email, ValidationError
 from app.models.user import User
 
 
-class RegisterForm(Form):
+class LoginForm(Form):
     email = StringField(validators=[DataRequired(), Length(8, 64), Email(message='邮箱格式不正确')])
     password = PasswordField(validators=[DataRequired(message='密码不能为空'), Length(6, 32)])
+
+
+class RegisterForm(LoginForm):
     nickname = StringField(validators=[DataRequired(), Length(2,10, message='昵称长度为2—10个字符')])
 
     def validate_email(self, field):
