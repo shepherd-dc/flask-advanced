@@ -1,8 +1,10 @@
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.models.base import Base
+
+login_manager = LoginManager()
 
 
 class User(UserMixin, Base):
@@ -31,3 +33,4 @@ class User(UserMixin, Base):
 
     # def get_id(self):
     #     return self.id
+

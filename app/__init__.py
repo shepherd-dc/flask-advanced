@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 
+from app.models.user import User
 from app.models.base import db
 from app.web import web
 
@@ -14,6 +15,8 @@ def create_app():
     register_blueprint(app)
 
     login_manager.init_app(app)
+    login_manager.login_view = 'web.login'
+    login_manager.login_message = '请先登录或注册'
 
     db.init_app(app)
     # db.create_all(app=app)
@@ -25,3 +28,8 @@ def create_app():
 
 def register_blueprint(app):
     app.register_blueprint(web)
+
+
+@login_manager.user_loader
+def load_user(uid):
+    return User.query.get(int(uid))

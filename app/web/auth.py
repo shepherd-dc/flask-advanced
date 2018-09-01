@@ -30,7 +30,10 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=True)
             session.permanent = True
-            # return redirect(url_for('web.search'))
+            _next = request.args.get('next')
+            if not _next and not _next.startswith('/'):
+                _next = url_for('web.index')
+            return redirect(_next)
         else:
             flash('用户名或密码错误')
     return render_template('auth/login.html', form=form)
