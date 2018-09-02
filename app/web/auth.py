@@ -31,7 +31,7 @@ def login():
             login_user(user, remember=True)
             session.permanent = True
             _next = request.args.get('next')
-            if not _next and not _next.startswith('/'):
+            if not _next or not _next.startswith('/'):
                 _next = url_for('web.index')
             return redirect(_next)
         else:
