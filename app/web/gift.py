@@ -16,7 +16,6 @@ def my_gifts():
 @web.route('/gifts/book/<isbn>')
 @login_required
 def save_to_gifts(isbn):
-    current_user.can_save_to_list(isbn)
     if current_user.can_save_to_list(isbn):
         with db.auto_commit():
             gift = Gift()
