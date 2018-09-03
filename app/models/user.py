@@ -41,8 +41,9 @@ class User(UserMixin, Base):
         if not book.first:
             return False
 
-        gifting = Gift.query.filter_by(uid=self.id, isbn=isbn, launched=False)
-        wishing = Wish.query.filter_by(uid=self.id, isbn=isbn, launched=False)
+        gifting = Gift.query.filter_by(uid=self.id, isbn=isbn, launched=False).first()
+        wishing = Wish.query.filter_by(uid=self.id, isbn=isbn, launched=False).first()
+        print(gifting, wishing)
         if not gifting and not wishing:
             return True
         else:
