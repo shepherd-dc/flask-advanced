@@ -58,7 +58,6 @@ def book_detail(isbn):
         if Gift.query.filter_by(uid=current_user.id, isbn=isbn, launched=False).first():
             has_in_gifts = True
 
-
     trade_gifts = Gift.query.filter_by(isbn=isbn, launched=False).all()
     trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
 

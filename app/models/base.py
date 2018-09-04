@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from datetime import datetime
 
 from flask import flash
-from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 from sqlalchemy import Integer, SmallInteger, Column
 
 
@@ -18,7 +18,14 @@ class SQLAlchemy(_SQLAlchemy):
             raise e
 
 
-db = SQLAlchemy()
+class MyQuery(BaseQuery):
+    def filter_by(self, **kwargs):
+        if 'status' not in kwargs.keys():
+            kwargs['status'] = 1
+        return super(MyQuery, self).filter_by(**kwargs)
+
+
+db = SQLAlchemy(query_class=MyQuery)
 
 
 class Base(db.Model):
