@@ -10,6 +10,7 @@ __author__ = '七月'
 
 
 @web.route('/my/wish')
+@login_required
 def my_wish():
     uid = current_user.id
     wishes_of_mine = Wish.get_user_wishes(uid)
@@ -17,6 +18,7 @@ def my_wish():
     gifts_count_list = Wish.get_gift_counts(isbn_list)
 
     my_wishes = MyWishes(wishes_of_mine, gifts_count_list)
+    print(my_wishes.wishes)
     return render_template('my_wish.html', wishes=my_wishes.wishes)
 
 

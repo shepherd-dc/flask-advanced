@@ -24,7 +24,7 @@ class MyWishes:
                 count = gift_count['count']
 
         my_wish = {
-            "gift_count": count,
+            "gifts_count": count,
             "book": BookViewModel(wish.book),
             "id": wish.id
         }
