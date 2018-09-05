@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, PasswordField
-from wtforms.validators import DataRequired, Length, Email, ValidationError
+from wtforms.validators import DataRequired, Length, Email, ValidationError, EqualTo
 
 from app.models.user import User
 
@@ -22,4 +22,8 @@ class RegisterForm(LoginForm):
         if User.query.filter_by(nickname=field.data).first():
             raise ValidationError('昵称已被注册')
 
+class ResetPasswordForm(Form):
+    password1 = PasswordField(validators=[DataRequired(message='密码不能为空'), Length(6, 32, message='密码长度为6-32位'),
+                                          EqualTo('password2', message='两次输入的密码不一致')])
+    password2 = PasswordField(validators=[DataRequired(message='密码不能为空'), Length(6, 32, message='密码长度为6-32位')])
 

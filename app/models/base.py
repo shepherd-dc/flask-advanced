@@ -8,11 +8,11 @@ from sqlalchemy import Integer, SmallInteger, Column
 
 class SQLAlchemy(_SQLAlchemy):
     @contextmanager
-    def auto_commit(self):
+    def auto_commit(self, msg='操作成功'):
         try:
             yield
             self.session.commit()
-            flash('操作成功')
+            flash(msg)
         except Exception as e:
             self.session.rollback()
             raise e

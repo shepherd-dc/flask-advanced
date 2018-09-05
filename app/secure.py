@@ -18,3 +18,11 @@ DATABASE = 'fisher'
 SQLALCHEMY_DATABASE_URI = '{}+{}://{}:{}@{}:{}/{}?charset=utf8'\
     .format(DIALECT, DRIVER, USERNAME, PASSWORD, HOST, PORT, DATABASE)
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Email配置
+MAIL_SERVER = 'smtp.qq.com'
+MAIL_PORT = 465
+MAIL_USE_SSL = True
+MAIL_USE_TSL = False
+MAIL_USERNAME = '347928429@qq.com'
+MAIL_PASSWORD = 'bsqsoafeebyzcach'
