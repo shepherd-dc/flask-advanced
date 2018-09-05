@@ -1,1 +1,20 @@
-<h1>别瞎访问，没这个页面</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Not found</title>
+    <style>
+        .pic-404{position:relative}
+        .back-home{position:absolute;top:520px;left:50%;transform:translate(-50%);border:2px solid #fff;padding:10px 50px;}
+        .back-home a{text-decoration:none;font-size:32px;color:#fff;}
+    </style>
+</head>
+<body style="padding:0; margin:0;background:#007bc1;">
+    <div class="pic-404">
+        <img src="{{url_for('static', filename='images/404.jpg')}}" alt="404" width="100%">
+    </div>
+    <div class="back-home">
+        <a href="/">返回首页</a>
+    </div>
+</body>
+</html>
