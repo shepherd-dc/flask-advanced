@@ -42,3 +42,8 @@ class Gift(Base):
         book = Book()
         book.search_by_isbn(self.isbn)
         return book.first
+
+    def is_yourself_gift(self, uid):
+        return True if self.uid == uid else False
+
+

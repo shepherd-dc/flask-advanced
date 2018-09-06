@@ -1,11 +1,15 @@
+from math import floor
+
 from flask import current_app
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
+from app.libs.enums import PendingStatus
 from app.libs.helper import is_isbn_or_key
 from app.models.base import Base, db
+from app.models.drift import Drift
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.book import Book
@@ -49,6 +53,26 @@ class User(UserMixin, Base):
             return True
         else:
             return False
+
+    def can_send_drift(self):
+        if self.beans < 1:
+            return False
+
+        success_gifts_count = Gift.query.filter_by(uid=self.id, launched=True).count()
+        success_receive_count = Drift.query.filter_by(requester_id=self.id, pending=PendingStatus.Success).count()
+        if floor(success_receive_count / 2) > floor(success_gifts_count):
+            return False
+        else:
+            return True
+
+    @property
+    def summary(self):
+        return dict(
+            nickname = self.nickname,
+            beans = self.beans,
+            email = self.email,
+            send_receive = str(self.send_counter) + '/' + str(self.receive_counter)
+        )
 
     def generate_token(self, expiration=600):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
