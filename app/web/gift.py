@@ -42,7 +42,7 @@ def save_to_gifts(isbn):
 @login_required
 def redraw_from_gifts(gid):
     gift = Gift.query.filter_by(id=gid, launched=False).first_or_404()
-    drift = Drift.query.filter_by(gift_id=gid, pending=PendingStatus.Waiting).first()
+    drift = Drift.query.filter_by(gift_id=gid).first()
     if drift:
         flash('该礼物正处于交易状态，请先前往鱼漂完成此交易。')
     else:
